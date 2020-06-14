@@ -88,7 +88,40 @@ class LinkedList {
     // garbage collector will remove the unused Node object
     prevNode.next = currentNode.next;
 
+    // This means we removed the last node
+    if (currentNode.next === null) {
+      this.tail = prevNode;
+    } else {
+      this.tail = currentNode.next;
+    }
+
     this.length--;
+  }
+
+  // Reversing a linked list is a little bit tricky, we need to use 3 pointers
+  // Basicaly we use a curr pointer to change the next pointer of the curr
+  // node to now point to the prev node, we keep doing thing until curr reaches to a null value
+  reverse() {
+    // If there's only one node
+    if (!this.head.next) return this.head;
+
+    let prev = null;
+    let curr = this.head;
+    let next;
+
+    while (curr !== null) {
+      next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+
+    // Now, our previous head node becomes our last node (tail)
+    this.tail = this.head;
+    // Making the last node, the head node (it's the inverse)
+    this.head = prev;
+
+    return this;
   }
 
   getList() {
@@ -109,9 +142,10 @@ const myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
-
 myLinkedList.insert(3, 99);
-console.log(myLinkedList.getList());
 myLinkedList.remove(5);
 
 console.log(myLinkedList.getList());
+myLinkedList.reverse();
+console.log(myLinkedList.getList());
+console.log(myLinkedList);
