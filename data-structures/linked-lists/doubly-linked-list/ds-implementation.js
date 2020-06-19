@@ -92,6 +92,7 @@ class DoublyLinkList {
 
     if (doesIndexExceedsLength) {
       prevNode.next = null;
+      this.tail = prevNode;
     } else {
       const currentNode = prevNode.next;
       const nextNode = currentNode.next;

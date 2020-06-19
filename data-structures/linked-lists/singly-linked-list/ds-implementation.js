@@ -78,7 +78,7 @@ class LinkedList {
   remove(index) {
     if (index === 0) return this.unshift();
 
-    let doesIndexExceedsLength = index >= this.length;
+    let doesIndexExceedsLength = index >= this.length - 1;
     // We always want to traverse to a node before the specified index
     const prevNode = this.traverseToIndex(
       doesIndexExceedsLength ? this.length - 2 : index - 1
@@ -91,16 +91,16 @@ class LinkedList {
     // This means we removed the last node
     if (currentNode.next === null) {
       this.tail = prevNode;
-    } else {
-      this.tail = currentNode.next;
     }
 
     this.length--;
   }
 
-  // Reversing a linked list is a little bit tricky, we need to use 3 pointers
-  // Basicaly we use a curr pointer to change the next pointer of the curr
-  // node to now point to the prev node, we keep doing thing until curr reaches to a null value
+  // Reversing a linked list is a little bit tricky, we need to use 3 pointers.
+  // Basicaly we use a curr pointer to change the next pointer of the curr node to
+  // be pointing to the prev node, we keep doing thing until curr reaches to a null value.
+
+  /* This implementation is a little bit more nicer than Andrei's, is more explicit */
   reverse() {
     // If there's only one node
     if (!this.head.next) return this.head;
@@ -134,6 +134,11 @@ class LinkedList {
     }
 
     return array;
+  }
+
+  getList() {
+    const array = [];
+    let currentNOde = this.head;
   }
 }
 
