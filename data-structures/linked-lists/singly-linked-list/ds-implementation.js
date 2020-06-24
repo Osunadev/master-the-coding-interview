@@ -135,11 +135,6 @@ class LinkedList {
 
     return array;
   }
-
-  getList() {
-    const array = [];
-    let currentNOde = this.head;
-  }
 }
 
 const myLinkedList = new LinkedList(10);
