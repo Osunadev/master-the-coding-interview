@@ -6,6 +6,7 @@ class Graph {
 
   addVertex(vertex) {
     // We start with an empty array, zero edges
+    /* We could use a Linked List too, the concept is the same */
     this.adjacentList[vertex] = [];
     this.numOfNodes++;
   }
