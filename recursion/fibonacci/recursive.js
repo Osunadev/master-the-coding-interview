@@ -42,7 +42,7 @@ function memoizedFibonacci(n) {
 // we could visualize it in a tree structure
 console.log(fibonacciRecursive(10));
 
-// Getting the fib of 100 would take years if we would use
+// Getting the fib of 100 would take years if we would've used
 // the normal recursive approach without memoization
 console.log(memoizedFibonacci(100));
 console.log(fibSequence);

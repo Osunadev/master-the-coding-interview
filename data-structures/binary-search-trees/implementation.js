@@ -248,7 +248,20 @@ bst.remove(173);
 //  4       180
 //1     160    185
 
-console.log(JSON.stringify(traverse(bst.root)));
+// Visiting order: l N r
+function inOrderTraverse(node, nodesArr = []) {
+  // Base Case
+  if (node === null) return;
+
+  inOrderTraverse(node.left, nodesArr);
+  nodesArr.push(node.value);
+  inOrderTraverse(node.right, nodesArr);
+  return nodesArr;
+}
+
+console.log(inOrderTraverse(bst.root));
+
+// console.log(JSON.stringify(traverse(bst.root)));
 
 function traverse(node) {
   const tree = { value: node.value };
