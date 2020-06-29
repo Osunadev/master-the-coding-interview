@@ -191,6 +191,53 @@ class BinarySearchTree {
       }
     }
   }
+
+  breadthFirstSearch() {
+    let currNode = this.root;
+    let list = [];
+    // To keep track the level we are, so that
+    // we can have access to the children
+    let queue = [];
+
+    // We're starting pushing the node at lvl 1
+    queue.push(currNode);
+
+    while (queue.length > 0) {
+      // We dequeue the first item of the queue
+      currNode = queue.shift();
+      list.push(currNode.value);
+
+      // If it has a left child, we push it to the queue
+      if (currNode.left) {
+        queue.push(currNode.left);
+      }
+
+      if (currNode.right) {
+        queue.push(currNode.right);
+      }
+    }
+
+    return list;
+  }
+
+  // Recursive approach
+  breadthFirstSearchR(queue, list) {
+    // Base case
+    if (!queue.length) return list;
+
+    let currNode = queue.shift();
+    list.push(currNode.value);
+
+    if (currNode.left) {
+      queue.push(currNode.left);
+    }
+
+    if (currNode.right) {
+      queue.push(currNode.right);
+    }
+
+    return this.breadthFirstSearchR(queue, list);
+  }
 }
 
 const bst = new BinarySearchTree();
@@ -248,24 +295,30 @@ bst.remove(173);
 //  4       180
 //1     160    185
 
-// Visiting order: l N r
-function inOrderTraverse(node, nodesArr = []) {
-  // Base Case
-  if (node === null) return;
+console.log('Breadth First Search: ', bst.breadthFirstSearch());
+console.log(
+  'Recursive Breadth First Search: ',
+  bst.breadthFirstSearchR([bst.root], [])
+);
 
-  inOrderTraverse(node.left, nodesArr);
-  nodesArr.push(node.value);
-  inOrderTraverse(node.right, nodesArr);
-  return nodesArr;
-}
+// // Visiting order: l N r
+// function inOrderTraverse(node, nodesArr = []) {
+//   // Base Case
+//   if (node === null) return;
 
-console.log(inOrderTraverse(bst.root));
+//   inOrderTraverse(node.left, nodesArr);
+//   nodesArr.push(node.value);
+//   inOrderTraverse(node.right, nodesArr);
+//   return nodesArr;
+// }
 
-// console.log(JSON.stringify(traverse(bst.root)));
+// console.log(inOrderTraverse(bst.root));
 
-function traverse(node) {
-  const tree = { value: node.value };
-  tree.left = node.left === null ? null : traverse(node.left);
-  tree.right = node.right === null ? null : traverse(node.right);
-  return tree;
-}
+// // console.log(JSON.stringify(traverse(bst.root)));
+
+// function traverse(node) {
+//   const tree = { value: node.value };
+//   tree.left = node.left === null ? null : traverse(node.left);
+//   tree.right = node.right === null ? null : traverse(node.right);
+//   return tree;
+// }
