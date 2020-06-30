@@ -238,6 +238,48 @@ class BinarySearchTree {
 
     return this.breadthFirstSearchR(queue, list);
   }
+
+  DFSPreOrder() {
+    return traversePreOrder(this.root, []);
+  }
+
+  DFSInOrder() {
+    return traverseInOrder(this.root, []);
+  }
+
+  DFSPostOrder() {
+    return traversePostOrder(this.root, []);
+  }
+}
+
+// Visiting order: N l r
+function traversePreOrder(node, list) {
+  // If we use the if's of if(node.left) we don't need this base case
+  // if (node === null) return;
+
+  list.push(node.value);
+  if (node.left) traversePreOrder(node.left, list);
+  if (node.right) traversePreOrder(node.right, list);
+
+  return list;
+}
+
+// Visiting order: l N r
+function traverseInOrder(node, list) {
+  if (node.left) traverseInOrder(node.left, list);
+  list.push(node.value);
+  if (node.right) traverseInOrder(node.right, list);
+
+  return list;
+}
+
+// Visiting order: l r N
+function traversePostOrder(node, list) {
+  if (node.left) traversePostOrder(node.left, list);
+  if (node.right) traversePostOrder(node.right, list);
+  list.push(node.value);
+
+  return list;
 }
 
 const bst = new BinarySearchTree();
@@ -295,30 +337,13 @@ bst.remove(173);
 //  4       180
 //1     160    185
 
-console.log('Breadth First Search: ', bst.breadthFirstSearch());
+console.log('- Breadth First Search: ', bst.breadthFirstSearch());
 console.log(
   'Recursive Breadth First Search: ',
   bst.breadthFirstSearchR([bst.root], [])
 );
+console.log('- Depth First Search');
 
-// // Visiting order: l N r
-// function inOrderTraverse(node, nodesArr = []) {
-//   // Base Case
-//   if (node === null) return;
-
-//   inOrderTraverse(node.left, nodesArr);
-//   nodesArr.push(node.value);
-//   inOrderTraverse(node.right, nodesArr);
-//   return nodesArr;
-// }
-
-// console.log(inOrderTraverse(bst.root));
-
-// // console.log(JSON.stringify(traverse(bst.root)));
-
-// function traverse(node) {
-//   const tree = { value: node.value };
-//   tree.left = node.left === null ? null : traverse(node.left);
-//   tree.right = node.right === null ? null : traverse(node.right);
-//   return tree;
-// }
+console.log('* Pre-Order Search DFS: ', bst.DFSPreOrder());
+console.log('* In-Order Search DFS: ', bst.DFSInOrder());
+console.log('* Post-Order Search DFS: ', bst.DFSPostOrder());

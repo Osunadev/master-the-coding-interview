@@ -1,4 +1,4 @@
-// This array is used as adjacent list
+// Remember that a heap can be represented as a list
 function buildHeap(array, endIndex) {
   // We start at the half of the designated portion of heap to be more efficient
   let halfHeapIdx = endIndex / 2;
